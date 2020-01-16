@@ -66,7 +66,7 @@ function fn_uasp_update() {
     if [[ $github_uasp_version > $uasp_version ]]; then
         echo "Downloading new version: $github_uasp_version"
         curl -sSL $github_uasp_download_url --output $tmp_dir/$uasp_filename.tmp
-        mv -f $tmp_dir/$uasp_filename.tmp $uasp_filename
+        mv -f $tmp_dir/$uasp_filename.tmp $uasp_filename && chmod 700 $uasp_filename
         echo "Update done, do ./uasp -v to verify version"
     else
         echo "You are on latest version"
@@ -156,7 +156,7 @@ function fn_plugins() {
         echo "${yellow}Checking $pluginname... ${reset}"
         # deletes to end of line
         printf "\033[K"
-        sleep 5
+        sleep 3
         # takes cursor one line up
         printf "\033[1A"
 
@@ -186,7 +186,7 @@ function fn_plugins() {
                         echo "---------------------" >> $plugins_file_outdated
 
                         fn_alert_info
-                        sleep 5
+                        sleep 1
                         is_latest=false
 
                         if [[ $autoupdate_plugin = true ]] && [[ $update_plugin = true ]]; then
@@ -194,7 +194,7 @@ function fn_plugins() {
                         fi
                     else
                         echo "${green}$pluginname is up to date${reset}"
-                        sleep 5
+                        sleep 1
 
                         is_latest=$(echo $getdata | jq -r .is_latest)
                     fi
@@ -203,7 +203,7 @@ function fn_plugins() {
 
                 else
                     echo "${red}Skipping $pluginname - does not exist on Umod${reset}"
-                    sleep 5
+                    sleep 1
                     printf "\033[1A"
                     printf "\033[K"
                 fi
@@ -218,6 +218,8 @@ function fn_plugins() {
 
             response=response.txt
             status=$(curl --head -s -m 5 -o $response -w '%{http_code}' $umod_api)
+            # Due to rate limit
+            sleep 2
 
             if test $status -eq 200; then
                 is_umod=true
