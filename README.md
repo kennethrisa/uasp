@@ -2,6 +2,8 @@
 
 ![Discord-webhook-alert](https://i.gyazo.com/9a485298fc49a9eb95a5ae1d28914e2c.png)
 
+![uasp-check](src/image/TiXFhuuMNT.gif)
+
 This script checks every plugin in your plugin folder.
 It checks first if plugin exist on Umod, if not/using custom plugin, it will get a flag Umod=false.
 
