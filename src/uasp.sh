@@ -4,7 +4,7 @@
 # Github: https://github.com/kennethrisa/uasp
 # Description: UASP - Umod Autoupdate Script for Plugins
 
-uasp_version="0.1.0"
+uasp_version="0.1.1"
 uasp_github="https://github.com/kennethrisa/uasp"
 script_dir="$( cd "$( dirname "$0" )" && pwd )"
 config_file="config.sh"
