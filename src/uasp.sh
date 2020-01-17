@@ -59,6 +59,7 @@ function fn_version() {
 }
 
 function fn_uasp_update() {
+    mkdir -p $tmp_dir
     get_github_uasp_version=$(curl -s -m 5 https://raw.githubusercontent.com/kennethrisa/uasp/master/uasp_version.json -H 'Content-Type: application/json')
     github_uasp_download_url="https://raw.githubusercontent.com/kennethrisa/uasp/master/src/uasp.sh"
     github_uasp_version=$(echo $get_github_uasp_version | jq -r '.[0].version')
@@ -108,10 +109,12 @@ function fn_test_config() {
 }
 
 function fn_download() {
+    mkdir -p $tmp_dir
+
     download_plugin=$(curl -sSL $download_url --output $tmp_dir/$name)
     downloaded_checksum=$(sha1sum $tmp_dir/$name | awk '{print $1}')
 
-    mkdir -p $tmp_dir
+    
 
     if [ $downloaded_checksum = $checksum ]; then
         json=$(jq --arg downloaded_checksum $downloaded_checksum -e '.['$counterid'].current_checksum = $downloaded_checksum' <<< $json)
