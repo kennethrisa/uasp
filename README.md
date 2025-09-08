@@ -1,3 +1,7 @@
+## 📦 Repository Archived
+
+This repository has been archived and is no longer maintained.
+
 # UASP - Umod Autoupdate Script for Plugins
 
 ![Discord-webhook-alert](https://i.gyazo.com/9a485298fc49a9eb95a5ae1d28914e2c.png)
